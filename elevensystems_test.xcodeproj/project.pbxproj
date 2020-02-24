@@ -16,6 +16,7 @@
 		CA377FC22404779B00917AF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA377FC02404779B00917AF3 /* LaunchScreen.storyboard */; };
 		CA377FCD2404779B00917AF3 /* elevensystems_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FCC2404779B00917AF3 /* elevensystems_testTests.swift */; };
 		CA377FD82404779B00917AF3 /* elevensystems_testUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FD72404779B00917AF3 /* elevensystems_testUITests.swift */; };
+		CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		CA377FD32404779B00917AF3 /* elevensystems_testUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = elevensystems_testUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA377FD72404779B00917AF3 /* elevensystems_testUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elevensystems_testUITests.swift; sourceTree = "<group>"; };
 		CA377FD92404779B00917AF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +103,9 @@
 		CA377FB12404779900917AF3 /* elevensystems_test */ = {
 			isa = PBXGroup;
 			children = (
+				CA377FE524047B0700917AF3 /* Contacts */,
 				CA377FB22404779900917AF3 /* AppDelegate.swift */,
 				CA377FB42404779900917AF3 /* SceneDelegate.swift */,
-				CA377FB62404779900917AF3 /* ViewController.swift */,
 				CA377FB82404779900917AF3 /* Main.storyboard */,
 				CA377FBE2404779B00917AF3 /* Assets.xcassets */,
 				CA377FC02404779B00917AF3 /* LaunchScreen.storyboard */,
@@ -129,6 +131,15 @@
 				CA377FD92404779B00917AF3 /* Info.plist */,
 			);
 			path = elevensystems_testUITests;
+			sourceTree = "<group>";
+		};
+		CA377FE524047B0700917AF3 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				CA377FB62404779900917AF3 /* ViewController.swift */,
+				CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */,
+			);
+			path = Contacts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA377FB72404779900917AF3 /* ViewController.swift in Sources */,
+				CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */,
 				CA377FBD2404779900917AF3 /* elevensystems_test.xcdatamodeld in Sources */,
 				CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */,
 				CA377FB52404779900917AF3 /* SceneDelegate.swift in Sources */,
