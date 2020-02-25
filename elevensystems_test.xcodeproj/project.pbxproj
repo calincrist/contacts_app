@@ -17,6 +17,8 @@
 		CA377FCD2404779B00917AF3 /* elevensystems_testTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FCC2404779B00917AF3 /* elevensystems_testTests.swift */; };
 		CA377FD82404779B00917AF3 /* elevensystems_testUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FD72404779B00917AF3 /* elevensystems_testUITests.swift */; };
 		CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */; };
+		CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */; };
+		CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		CA377FD72404779B00917AF3 /* elevensystems_testUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = elevensystems_testUITests.swift; sourceTree = "<group>"; };
 		CA377FD92404779B00917AF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
+		CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
+		CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,8 +142,18 @@
 			children = (
 				CA377FB62404779900917AF3 /* ViewController.swift */,
 				CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */,
+				CA377FED2404823A00917AF3 /* Details */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		CA377FED2404823A00917AF3 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */,
+				CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +260,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */,
 				CA377FC22404779B00917AF3 /* LaunchScreen.storyboard in Resources */,
 				CA377FBF2404779B00917AF3 /* Assets.xcassets in Resources */,
 				CA377FBA2404779900917AF3 /* Main.storyboard in Resources */,
@@ -275,6 +290,7 @@
 			files = (
 				CA377FB72404779900917AF3 /* ViewController.swift in Sources */,
 				CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */,
+				CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */,
 				CA377FBD2404779900917AF3 /* elevensystems_test.xcdatamodeld in Sources */,
 				CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */,
 				CA377FB52404779900917AF3 /* SceneDelegate.swift in Sources */,

@@ -37,9 +37,19 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.dataSource = self
+        tableView.delegate = self
+        
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addContact))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
-
+    @objc func addContact() {
+        let navigationController = self.navigationController
+        let detailsViewController: ContactDetailsViewController = ContactDetailsViewController()
+        detailsViewController.newContact = true
+        
+        navigationController?.pushViewController(detailsViewController, animated: true)
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -69,6 +79,41 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
+}
+
+extension ViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contact = contacts[indexPath.row]
+        
+        let navigationController = self.navigationController
+        let detailsViewController: ContactDetailsViewController = ContactDetailsViewController()
+        detailsViewController.contact = contact
+        
+        navigationController?.pushViewController(detailsViewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        // 1
+        let deleteHandler: UIContextualAction.Handler = { [weak self] action, view, callback in
+            self?.contacts.remove(at: indexPath.row);
+            
+            self?.tableView.beginUpdates()
+            self?.tableView.deleteRows(at: [indexPath], with: .fade)
+            self?.tableView.endUpdates()
+            
+            callback(true)
+        }
+
+      // 2
+      let deleteAction = UIContextualAction(style: .destructive,
+                                            title: "Delete",
+                                            handler: deleteHandler)
+
+      // 3
+      return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
 }
 
