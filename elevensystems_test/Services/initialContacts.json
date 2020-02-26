@@ -1,0 +1,46 @@
+[
+    {
+        "contactID": "1",
+        "firstName": "Calin",
+        "lastName": "Ciubotariu",
+        "phoneNumber": "07123123123",
+        "streetAddress1": "Strada Nicolae Iroga",
+        "streetAddress2": "nr. -, bl. 62, sc. A",
+        "city": "Vaslui",
+        "state": "Florida",
+        "zipCode": "402123"
+    },
+    {
+        "contactID": "2",
+        "firstName": "John",
+        "lastName": "Doe",
+        "phoneNumber": "07123123124",
+        "streetAddress1": "King Ferdinand",
+        "streetAddress2": "no. 22-26",
+        "city": "Cluj",
+        "state": "Cluj-Napoca",
+        "zipCode": "402123"
+    },
+    {
+        "contactID": "3",
+        "firstName": "Jimmy",
+        "lastName": "Bert",
+        "phoneNumber": "07123123124",
+        "streetAddress1": "Martin Luther King ",
+        "streetAddress2": "no. 256",
+        "city": "Miami",
+        "state": "Florida",
+        "zipCode": "402123"
+    },
+    {
+      "contactID": "4",
+      "firstName": "Jeanette",
+      "lastName": "Penddreth",
+      "phoneNumber": "07123123124",
+      "streetAddress1": "330 N State Street",
+      "streetAddress2": "10pin Bowling Lounge",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60610",
+    }
+]

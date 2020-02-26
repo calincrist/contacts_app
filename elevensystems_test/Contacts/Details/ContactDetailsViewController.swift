@@ -10,7 +10,7 @@ import UIKit
 import os.log
 
 class ContactDetailsViewController: UIViewController {
-
+    
     //  MARK: -IBOutlets
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var callButton: UIButton!
@@ -45,7 +45,7 @@ class ContactDetailsViewController: UIViewController {
     @IBOutlet weak var editViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var editView: UIView!
     
-    var contact: [String: String]?
+    var contact: ContactItem?
     var editableState: Bool = false
     var newContact: Bool = false
     
@@ -57,14 +57,14 @@ class ContactDetailsViewController: UIViewController {
         self.init(contact: nil)
     }
     
-    init(contact: [String: String]?) {
+    init(contact: ContactItem?) {
         self.contact = contact
         super.init(nibName: nil, bundle: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let _ = contact {
             initializeView()
         } else {
@@ -74,9 +74,9 @@ class ContactDetailsViewController: UIViewController {
         configureView(forState: editableState)
         
         
-//        let buttonSystemItem =  editableState ? UIBarButtonItem.SystemItem.save : UIBarButtonItem.SystemItem.edit
-//        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: #selector(editContact))
-//        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        //        let buttonSystemItem =  editableState ? UIBarButtonItem.SystemItem.save : UIBarButtonItem.SystemItem.edit
+        //        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: #selector(editContact))
+        //        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -85,42 +85,42 @@ class ContactDetailsViewController: UIViewController {
     }
     
     func initializeView() {
-        if let firstName = contact?["firstName"],
-            let lastName = contact?["lastName"] {
-                fullNameLabel?.text = "\(firstName) \(lastName)"
+        if let firstName = contact?.firstName,
+            let lastName = contact?.lastName {
+            fullNameLabel?.text = "\(firstName) \(lastName)"
             
             firstNameTextInput.text = firstName
             lastNameTextInput.text = lastName
         }
         
-        if let phoneNumber = contact?["phoneNumber"] {
+        if let phoneNumber = contact?.phoneNumber {
             phoneNumberLabel.text = phoneNumber
             phoneNumberTextInput.text = phoneNumber
             
             phoneNumberTextInput.isEnabled = true
         }
         
-        if let streetAddress1 = contact?["streetAddress1"] {
+        if let streetAddress1 = contact?.streetAddress1 {
             streetAddress1Label.text = streetAddress1
             streetAddress1TextInput.text = streetAddress1
         }
         
-        if let streetAddress2 = contact?["streetAddress2"] {
+        if let streetAddress2 = contact?.streetAddress2 {
             streetAddress2Label.text = streetAddress2
             streetAddress2TextInput.text = streetAddress2
         }
         
-        if let city = contact?["city"] {
+        if let city = contact?.city {
             cityLabel.text = city
             cityTextInput.text = city
         }
         
-        if let state = contact?["state"] {
+        if let state = contact?.state {
             stateLabel.text = state
             stateTextInput.text = state
         }
         
-        if let zipCode = contact?["zipCode"] {
+        if let zipCode = contact?.zipCode {
             zipCodeLabel.text = zipCode
             zipCodeTextInput.text = zipCode
         }
@@ -204,7 +204,7 @@ class ContactDetailsViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         displayViewConstraint.constant = state ? 0 : 200
-        editViewConstraint.constant = state ? 240 : 0
+        editViewConstraint.constant = state ? 350 : 0
         
         
         UIView.animate(withDuration: 500, animations: {
@@ -223,38 +223,38 @@ extension ContactDetailsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
-            case firstNameTextInput:
-                firstNameTextInput.resignFirstResponder()
-                lastNameTextInput.becomeFirstResponder()
+        case firstNameTextInput:
+            firstNameTextInput.resignFirstResponder()
+            lastNameTextInput.becomeFirstResponder()
             
-            case lastNameTextInput:
-                lastNameTextInput.resignFirstResponder()
-                phoneNumberTextInput.becomeFirstResponder()
+        case lastNameTextInput:
+            lastNameTextInput.resignFirstResponder()
+            phoneNumberTextInput.becomeFirstResponder()
             
-            case phoneNumberTextInput:
-                phoneNumberTextInput.resignFirstResponder()
-                streetAddress1TextInput.becomeFirstResponder()
+        case phoneNumberTextInput:
+            phoneNumberTextInput.resignFirstResponder()
+            streetAddress1TextInput.becomeFirstResponder()
             
-            case streetAddress1TextInput:
-                streetAddress1TextInput.resignFirstResponder()
-                streetAddress2TextInput.becomeFirstResponder()
+        case streetAddress1TextInput:
+            streetAddress1TextInput.resignFirstResponder()
+            streetAddress2TextInput.becomeFirstResponder()
             
-            case streetAddress2TextInput:
-                streetAddress2TextInput.resignFirstResponder()
-                cityTextInput.becomeFirstResponder()
+        case streetAddress2TextInput:
+            streetAddress2TextInput.resignFirstResponder()
+            cityTextInput.becomeFirstResponder()
             
-            case cityTextInput:
-                cityTextInput.resignFirstResponder()
-                stateTextInput.becomeFirstResponder()
+        case cityTextInput:
+            cityTextInput.resignFirstResponder()
+            stateTextInput.becomeFirstResponder()
             
-            case stateTextInput:
-                stateTextInput.resignFirstResponder()
-                zipCodeTextInput.becomeFirstResponder()
+        case stateTextInput:
+            stateTextInput.resignFirstResponder()
+            zipCodeTextInput.becomeFirstResponder()
             
-            case zipCodeTextInput:
-                zipCodeTextInput.resignFirstResponder()
+        case zipCodeTextInput:
+            zipCodeTextInput.resignFirstResponder()
             
-            default: break
+        default: break
             
         }
         

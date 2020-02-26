@@ -19,6 +19,9 @@
 		CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */; };
 		CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */; };
 		CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */; };
+		CACA33BE2405EC5B00541675 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33BD2405EC5B00541675 /* JSONLoader.swift */; };
+		CACA33C32405ED0A00541675 /* ContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33C22405ED0A00541675 /* ContactItem.swift */; };
+		CACA33C52405F38100541675 /* initialContacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CACA33C42405F38100541675 /* initialContacts.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,9 @@
 		CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
 		CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailsViewController.xib; sourceTree = "<group>"; };
+		CACA33BD2405EC5B00541675 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		CACA33C22405ED0A00541675 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItem.swift; sourceTree = "<group>"; };
+		CACA33C42405F38100541675 /* initialContacts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = initialContacts.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,8 @@
 		CA377FB12404779900917AF3 /* elevensystems_test */ = {
 			isa = PBXGroup;
 			children = (
+				CACA33C12405ECF900541675 /* Models */,
+				CACA33BC2405EC3200541675 /* Services */,
 				CA377FE524047B0700917AF3 /* Contacts */,
 				CA377FB22404779900917AF3 /* AppDelegate.swift */,
 				CA377FB42404779900917AF3 /* SceneDelegate.swift */,
@@ -154,6 +162,23 @@
 				CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		CACA33BC2405EC3200541675 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CACA33BD2405EC5B00541675 /* JSONLoader.swift */,
+				CACA33C42405F38100541675 /* initialContacts.json */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CACA33C12405ECF900541675 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CACA33C22405ED0A00541675 /* ContactItem.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CACA33C52405F38100541675 /* initialContacts.json in Resources */,
 				CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */,
 				CA377FC22404779B00917AF3 /* LaunchScreen.storyboard in Resources */,
 				CA377FBF2404779B00917AF3 /* Assets.xcassets in Resources */,
@@ -293,7 +319,9 @@
 				CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */,
 				CA377FBD2404779900917AF3 /* elevensystems_test.xcdatamodeld in Sources */,
 				CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */,
+				CACA33C32405ED0A00541675 /* ContactItem.swift in Sources */,
 				CA377FB52404779900917AF3 /* SceneDelegate.swift in Sources */,
+				CACA33BE2405EC5B00541675 /* JSONLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

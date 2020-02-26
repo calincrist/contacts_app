@@ -11,27 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    var contacts = [[
-        "contactID": "1",
-        "firstName": "Calin",
-        "lastName": "Ciubotariu",
-        "phoneNumber": "07123123123",
-        "streetAddress1": "Strada Nicolae Iroga",
-        "streetAddress2": "nr. -, bl. 62, sc. A",
-        "city": "Vaslui",
-        "state": "Florida",
-        "zipCode": "402123"
-    ], [
-        "contactID": "2",
-        "firstName": "Calin2",
-        "lastName": "Ciubotariu2",
-        "phoneNumber": "07123123124",
-        "streetAddress1": "Strada Nicolae Iroga",
-        "streetAddress2": "nr. -, bl. 62, sc. A",
-        "city": "Vaslui",
-        "state": "Florida",
-        "zipCode": "402123"
-    ]]
+    var contacts: [ContactItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +21,13 @@ class ViewController: UIViewController {
         
         let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addContact))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        fetchInitialContacts()
+    }
+    
+    func fetchInitialContacts() {
+        contacts = JSONLoader.loadJSON(file: "initialContacts")
+        print("contacts", contacts)
     }
 
     @objc func addContact() {
@@ -66,12 +53,12 @@ extension ViewController: UITableViewDataSource {
         
         let contact = contacts[indexPath.row]
         
-        if let firstName = contact["firstName"],
-            let lastName = contact["lastName"] {
+        if let firstName = contact.firstName,
+            let lastName = contact.lastName {
                 cell.fullNameLabel?.text = "\(firstName) \(lastName)"
         }
         
-        if let phoneNumber = contact["phoneNumber"] {
+        if let phoneNumber = contact.phoneNumber {
             cell.phoneNumberLabel?.text = phoneNumber
         }
         
@@ -95,8 +82,6 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        // 1
         let deleteHandler: UIContextualAction.Handler = { [weak self] action, view, callback in
             self?.contacts.remove(at: indexPath.row);
             
@@ -106,14 +91,11 @@ extension ViewController: UITableViewDelegate {
             
             callback(true)
         }
-
-      // 2
       let deleteAction = UIContextualAction(style: .destructive,
                                             title: "Delete",
                                             handler: deleteHandler)
 
-      // 3
-      return UISwipeActionsConfiguration(actions: [deleteAction])
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
 
