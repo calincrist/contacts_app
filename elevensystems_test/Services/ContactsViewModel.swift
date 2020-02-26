@@ -27,6 +27,22 @@ class ContactsViewModel: NSObject {
         return manager.fetchContact(by: contactID)
     }
     
+    func deleteContact(_ contactItem: ContactItem) -> Bool {
+        guard manager.deleteContact(contactItem) else {
+            return false
+        }
+        
+        contactItems.removeAll { (item) -> Bool in
+            contactItem.contactID == item.contactID
+        }
+        
+        return true
+    }
+    
+    func updateContact(_ contactItem: ContactItem) {
+        manager.updateContact(contactItem)
+    }
+    
     func numberOfContacts() -> Int {
         return contactItems.count
     }

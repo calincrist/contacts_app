@@ -79,8 +79,8 @@ extension ViewController: UITableViewDataSource {
                 cell.fullNameLabel?.text = "\(firstName) \(lastName)"
         }
         
-        if let phoneNumber = contact.phoneNumber {
-            cell.phoneNumberLabel?.text = phoneNumber
+        if let contactID = contact.contactID {
+            cell.phoneNumberLabel?.text = contactID
         }
         
         return cell
@@ -104,11 +104,19 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteHandler: UIContextualAction.Handler = { [weak self] action, view, callback in
-//            self?.contacts.remove(at: indexPath.row);
             
-            self?.tableView.beginUpdates()
-            self?.tableView.deleteRows(at: [indexPath], with: .fade)
-            self?.tableView.endUpdates()
+            guard let weakSelf = self else {
+                return
+            }
+            
+            let contact = weakSelf.viewModel.contactItem(at: indexPath)
+            guard weakSelf.viewModel.deleteContact(contact) else {
+                return
+            }
+            
+            weakSelf.tableView.beginUpdates()
+            weakSelf.tableView.deleteRows(at: [indexPath], with: .fade)
+            weakSelf.tableView.endUpdates()
             
             callback(true)
         }

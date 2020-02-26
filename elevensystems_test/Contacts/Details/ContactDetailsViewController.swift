@@ -198,6 +198,22 @@ class ContactDetailsViewController: UIViewController {
             navigationController?.popViewController(animated: true)
         } else {
             configureView(forState: editableState)
+            if let item = self.contact {
+                
+                var contactCopy = item
+                contactCopy.firstName = firstNameTextInput.text
+                contactCopy.lastName = lastNameTextInput.text
+                contactCopy.phoneNumber = phoneNumberTextInput.text
+                contactCopy.streetAddress1 = streetAddress1TextInput.text
+                contactCopy.streetAddress2 = streetAddress2TextInput.text
+                contactCopy.city = cityTextInput.text
+                contactCopy.state = stateTextInput.text
+                contactCopy.zipCode = zipCodeTextInput.text
+                
+                fullNameLabel.text = contactCopy.fullName
+                
+                coreData?.updateContact(contactCopy)
+            }
         }
     }
     

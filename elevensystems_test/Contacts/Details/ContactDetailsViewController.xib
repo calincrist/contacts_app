@@ -331,7 +331,6 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="FO5-LX-OHI"/>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="f0L-g8-VHn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="OVW-kI-FZ3"/>
                 <constraint firstItem="f0L-g8-VHn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Olt-Xj-g37"/>

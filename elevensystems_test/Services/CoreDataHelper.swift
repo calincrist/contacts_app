@@ -39,16 +39,80 @@ class CoreDataHelper: NSObject {
         contact.state = newContact.state
         contact.zipCode = newContact.zipCode
         
-        print("Adding contact...", newContact.phoneNumber)
+        save()
+    }
+    
+    func deleteContact(_ contact: ContactItem) -> Bool {
+        
+        guard let contactID = contact.contactID else {
+            return false
+        }
+
+        guard let managedContact = fetchManagedContact(by: contactID) else {
+            return false
+        }
+        
+        let managedContext = container.viewContext
+        managedContext.delete(managedContact)
         
         save()
+        return true
+    }
+    
+    func updateContact(_ contact: ContactItem) {
+        
+        guard let contactID = contact.contactID else {
+            return
+        }
+
+        guard let managedContact = fetchManagedContact(by: contactID) else {
+            return
+        }
+        
+        print("managedContact", managedContact)
+        
+        managedContact.setValue(contact.firstName, forKey: "firstName")
+        managedContact.setValue(contact.lastName, forKey: "lastName")
+        managedContact.setValue(contact.phoneNumber, forKey: "phoneNumber")
+        managedContact.setValue(contact.streetAddress1, forKey: "streetAddress1")
+        managedContact.setValue(contact.streetAddress2, forKey: "streetAddress2")
+        managedContact.setValue(contact.city, forKey: "city")
+        managedContact.setValue(contact.state, forKey: "state")
+        managedContact.setValue(contact.zipCode, forKey: "zipCode")
+        
+        save()
+    }
+    
+    func fetchManagedContact(by contactID: String) -> Contact? {
+        
+        let managedContext = container.viewContext
+        let request: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let predicate = NSPredicate(format: "contactID = %@", contactID)
+        request.predicate = predicate
+        
+        var fetchedContacts: [Contact] = []
+        
+        do {
+            let fetchResult = try managedContext.fetch(request)
+            for contactData in fetchResult {
+                fetchedContacts.append(contactData)
+            }
+        } catch {
+            print("Failed to fetch contacts: (error)")
+        }
+        
+        if (fetchedContacts.count == 0) {
+            return nil
+        }
+        
+        return fetchedContacts[0]
     }
     
     func fetchContact(by contactID: String) -> ContactItem? {
         
         let managedContext = container.viewContext
         let request: NSFetchRequest<Contact> = Contact.fetchRequest()
-        let predicate = NSPredicate(format: "contactID = %s", contactID)
+        let predicate = NSPredicate(format: "contactID = %@", contactID)
         request.predicate = predicate
         
         var fetchedContacts: [ContactItem] = []
