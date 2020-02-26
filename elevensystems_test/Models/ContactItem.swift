@@ -18,20 +18,37 @@ struct ContactItem: Codable {
     var state: String?
     var city: String?
     var zipCode: String?
+    
+    var fullName: String {
+        var endResult = ""
+        if let firstName = firstName {
+            endResult += firstName
+        }
+        
+        if let lastName = lastName {
+            endResult += " \(lastName)"
+        }
+        
+        return endResult
+    }
 }
 
-//extension ContactItem {
-//    
-//    init(dict: [String:AnyObject]) {
-//        self.contactID = dict["contactID"] as? String
-//        self.firstName = dict["firstName"] as? String
-//        self.lastName = dict["lastName"] as? String
-//        self.streetAddress1 = dict["streetAddress1"] as? String
-//        self.streetAddress2 = dict["streetAddress2"] as? String
-//        
-//        self.state = dict["state"] as? String
-//        self.city = dict["city"] as? String
-//        
-//        self.zipCode = dict["zipCode"] as? String
-//    }
-//}
+extension ContactItem {
+
+    init(data: Contact) {
+        
+        self.contactID = data.contactID
+        
+        self.firstName = data.firstName
+        self.lastName = data.lastName
+        self.phoneNumber = data.phoneNumber
+        
+        self.streetAddress1 = data.streetAddress1
+        self.streetAddress2 = data.streetAddress2
+
+        self.state = data.state
+        self.city = data.city
+
+        self.zipCode = data.zipCode
+    }
+}

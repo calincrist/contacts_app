@@ -22,6 +22,8 @@
 		CACA33BE2405EC5B00541675 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33BD2405EC5B00541675 /* JSONLoader.swift */; };
 		CACA33C32405ED0A00541675 /* ContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33C22405ED0A00541675 /* ContactItem.swift */; };
 		CACA33C52405F38100541675 /* initialContacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CACA33C42405F38100541675 /* initialContacts.json */; };
+		CACA33C72405F91000541675 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33C62405F91000541675 /* CoreDataHelper.swift */; };
+		CACA33C92405FE7E00541675 /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33C82405FE7E00541675 /* ContactsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,8 @@
 		CACA33BD2405EC5B00541675 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		CACA33C22405ED0A00541675 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItem.swift; sourceTree = "<group>"; };
 		CACA33C42405F38100541675 /* initialContacts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = initialContacts.json; sourceTree = "<group>"; };
+		CACA33C62405F91000541675 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		CACA33C82405FE7E00541675 /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 			children = (
 				CACA33BD2405EC5B00541675 /* JSONLoader.swift */,
 				CACA33C42405F38100541675 /* initialContacts.json */,
+				CACA33C62405F91000541675 /* CoreDataHelper.swift */,
+				CACA33C82405FE7E00541675 /* ContactsViewModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -318,8 +324,10 @@
 				CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */,
 				CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */,
 				CA377FBD2404779900917AF3 /* elevensystems_test.xcdatamodeld in Sources */,
+				CACA33C92405FE7E00541675 /* ContactsViewModel.swift in Sources */,
 				CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */,
 				CACA33C32405ED0A00541675 /* ContactItem.swift in Sources */,
+				CACA33C72405F91000541675 /* CoreDataHelper.swift in Sources */,
 				CA377FB52404779900917AF3 /* SceneDelegate.swift in Sources */,
 				CACA33BE2405EC5B00541675 /* JSONLoader.swift in Sources */,
 			);

@@ -49,6 +49,8 @@ class ContactDetailsViewController: UIViewController {
     var editableState: Bool = false
     var newContact: Bool = false
     
+    var coreData: CoreDataHelper?
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -147,8 +149,6 @@ class ContactDetailsViewController: UIViewController {
     
     @objc func saveContact() {
         editableState = false
-        configureView(forState: editableState)
-        
         
         if firstNameTextInput.isFirstResponder {
             firstNameTextInput.resignFirstResponder()
@@ -183,8 +183,21 @@ class ContactDetailsViewController: UIViewController {
         }
         
         if newContact {
-            //  TODO: save action
+            var contactItem = ContactItem()
+            contactItem.contactID = UUID().uuidString
+            contactItem.firstName = firstNameTextInput.text
+            contactItem.lastName = lastNameTextInput.text
+            contactItem.phoneNumber = phoneNumberTextInput.text
+            contactItem.streetAddress1 = streetAddress1TextInput.text
+            contactItem.streetAddress2 = streetAddress2TextInput.text
+            contactItem.city = cityTextInput.text
+            contactItem.state = stateTextInput.text
+            contactItem.zipCode = zipCodeTextInput.text
+            
+            coreData?.addContact(contactItem)
             navigationController?.popViewController(animated: true)
+        } else {
+            configureView(forState: editableState)
         }
     }
     
