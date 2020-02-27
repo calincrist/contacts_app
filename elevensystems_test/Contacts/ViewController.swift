@@ -38,16 +38,29 @@ class ViewController: UIViewController {
     
     func fetchInitialContacts() {
         
-        viewModel.fetchAll()
+        if (!intialContactsAreLoaded()) {
+            let contacts = JSONLoader.loadJSON(file: "initialContacts")
+            let manager = CoreDataHelper()
+
+            for contact in contacts {
+                print("Adding", contact)
+                manager.addContact(contact)
+            }
+            
+            setIntialContactsAreLoaded(true)
+        }
         
-//        contacts = JSONLoader.loadJSON(file: "initialContacts")
-//
-//        let manager = CoreDataHelper()
-//
-//        for contact in contacts {
-//            print("Adding", contact)
-//            manager.addContact(contact)
-//        }
+        viewModel.fetchAll()
+    }
+    
+    private func setIntialContactsAreLoaded(_ value: Bool) {
+        let defaults = UserDefaults.standard
+        defaults.set(value, forKey: "intialContactsAreLoaded")
+    }
+    
+    private func intialContactsAreLoaded() -> Bool {
+        let defaults = UserDefaults.standard
+        return defaults.bool(forKey: "intialContactsAreLoaded")
     }
 
     @objc func addContact() {

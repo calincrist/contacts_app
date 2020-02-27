@@ -37,6 +37,9 @@ class ContactDetailsViewController: UIViewController {
     
     var coreData: CoreDataHelper?
     
+    
+    //  MARK: - Init
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
@@ -63,6 +66,9 @@ class ContactDetailsViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    
+    //  MARK: - Add content views
+    
     func initializeView() {
         if let firstName = contact?.firstName,
             let lastName = contact?.lastName {
@@ -78,6 +84,7 @@ class ContactDetailsViewController: UIViewController {
         
         setContentViewConstraints(for: presentedContent)
     }
+    
     
     func addEditContentView() {
         
@@ -126,6 +133,19 @@ class ContactDetailsViewController: UIViewController {
         UIApplication.shared.sendAction(#selector(UIApplication.resignFirstResponder), to: nil, from: nil, for: nil)
     }
     
+    func configureBarButtonItem(forState state: State) {
+    
+        let buttonSystemItem =  state == .display ? UIBarButtonItem.SystemItem.edit : UIBarButtonItem.SystemItem.save
+        let barButtonAction = state == .display ? #selector(editContact) : #selector(saveContact)
+        
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: barButtonAction)
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    
+    
+    //  MARK: - Actions
+    
     @objc func editContact() {
         state = .edit
         configureBarButtonItem(forState: state)
@@ -139,15 +159,6 @@ class ContactDetailsViewController: UIViewController {
         
         state = .display
         configureBarButtonItem(forState: state)
-    }
-    
-    func configureBarButtonItem(forState state: State) {
-    
-        let buttonSystemItem =  state == .display ? UIBarButtonItem.SystemItem.edit : UIBarButtonItem.SystemItem.save
-        let barButtonAction = state == .display ? #selector(editContact) : #selector(saveContact)
-        
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: barButtonAction)
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
     @IBAction func makeCall(_ sender: Any) {
@@ -211,11 +222,17 @@ extension ContactDetailsViewController: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch (result) {
         case .cancelled:
-            print("Message was cancelled")
+            print("Cancelled")
+            dismiss(animated: true, completion: nil)
+            
         case .failed:
-            print("Message failed")
+            print("Failed")
+            dismiss(animated: true, completion: nil)
+            
         case .sent:
-            print("Message was sent")
+            print("Sent!")
+            dismiss(animated: true, completion: nil)
+            
         default:
             break
         }

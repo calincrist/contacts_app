@@ -49,7 +49,7 @@
 
 /* Begin PBXFileReference section */
 		CA306DFA2407118F0020EA2B /* ContactDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactDetails.storyboard; sourceTree = "<group>"; };
-		CA377FAF2404779900917AF3 /* elevensystems_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = elevensystems_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA377FAF2404779900917AF3 /* Contacts App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Contacts App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA377FB22404779900917AF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA377FB42404779900917AF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CA377FB62404779900917AF3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		CA377FB02404779900917AF3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CA377FAF2404779900917AF3 /* elevensystems_test.app */,
+				CA377FAF2404779900917AF3 /* Contacts App.app */,
 				CA377FC82404779B00917AF3 /* elevensystems_testTests.xctest */,
 				CA377FD32404779B00917AF3 /* elevensystems_testUITests.xctest */,
 			);
@@ -224,7 +224,7 @@
 			);
 			name = elevensystems_test;
 			productName = elevensystems_test;
-			productReference = CA377FAF2404779900917AF3 /* elevensystems_test.app */;
+			productReference = CA377FAF2404779900917AF3 /* Contacts App.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CA377FC72404779B00917AF3 /* elevensystems_testTests */ = {
@@ -534,7 +534,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.calincrist.elevensystems-test";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Contacts App";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -552,7 +552,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.calincrist.elevensystems-test";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Contacts App";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

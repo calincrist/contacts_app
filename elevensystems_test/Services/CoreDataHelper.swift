@@ -134,9 +134,12 @@ class CoreDataHelper: NSObject {
         print("Fetching all contacts...");
         
         let managedContext = container.viewContext
-        let request: NSFetchRequest<Contact> = Contact.fetchRequest()
-        var fetchedContacts: [ContactItem] = []
         
+        let request: NSFetchRequest<Contact> = Contact.fetchRequest()
+        let sort = NSSortDescriptor(key: "firstName", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        var fetchedContacts: [ContactItem] = []
         do {
             let fetchResult = try managedContext.fetch(request)
             for contactData in fetchResult {

@@ -95,8 +95,6 @@
                                     <constraint firstItem="2Td-GZ-d1f" firstAttribute="top" secondItem="1zP-OI-QFN" secondAttribute="top" id="WNt-Aj-HrR"/>
                                     <constraint firstAttribute="trailing" secondItem="2Td-GZ-d1f" secondAttribute="trailing" id="Xc0-w3-aqi"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Bon-zw-rQo"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="iNS-X9-x4x"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
