@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addContact))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
-        fetchInitialContacts()
+        fetchContacts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,10 +36,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func fetchInitialContacts() {
+    func fetchContacts() {
         
         if (!intialContactsAreLoaded()) {
-            let contacts = JSONLoader.loadJSON(file: "initialContacts")
+            //  initialContactsJSONFileName is set in AppDelegate.swift
+            let contacts = JSONLoader.loadJSON(file: initialContactsJSONFileName)
             let manager = CoreDataHelper()
 
             for contact in contacts {

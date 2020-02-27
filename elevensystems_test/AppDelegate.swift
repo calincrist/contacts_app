@@ -9,6 +9,10 @@
 import UIKit
 import CoreData
 
+
+let initialContactsJSONFileName = "initialContacts"
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
