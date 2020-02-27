@@ -7,7 +7,13 @@
 //
 
 import UIKit
+import MessageUI
+
 import os.log
+
+protocol ContactActionDelegate: class {
+    func saveAction()
+}
 
 class ContactDetailsViewController: UIViewController {
     
@@ -15,39 +21,19 @@ class ContactDetailsViewController: UIViewController {
     @IBOutlet weak var fullNameLabel: UILabel!
     @IBOutlet weak var callButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
-    @IBOutlet weak var sendEmailButton: UIButton!
+    @IBOutlet weak var containerView: UIView!
     
+    weak var contactActionDelegate: ContactActionDelegate!
     
-    @IBOutlet weak var phoneNumberLabel: UILabel!
-    @IBOutlet weak var streetAddress1Label: UILabel!
-    @IBOutlet weak var streetAddress2Label: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var zipCodeLabel: UILabel!
-    
-    
-    @IBOutlet weak var lastNameTextInput: UITextField!
-    @IBOutlet weak var firstNameTextInput: UITextField!
-    @IBOutlet weak var phoneNumberTextInput: UITextField!
-    @IBOutlet weak var streetAddress1TextInput: UITextField!
-    @IBOutlet weak var streetAddress2TextInput: UITextField!
-    @IBOutlet weak var cityTextInput: UITextField!
-    @IBOutlet weak var stateTextInput: UITextField!
-    @IBOutlet weak var zipCodeTextInput: UITextField!
-    
-    @IBOutlet weak var phoneNumberViewStack: UIStackView!
-    @IBOutlet weak var phoneNumberEditStack: UIStackView!
-    @IBOutlet weak var addressViewStack: UIStackView!
-    @IBOutlet weak var addressEditStack: UIStackView!
-    
-    @IBOutlet weak var displayViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var displayView: UIView!
-    @IBOutlet weak var editViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var editView: UIView!
+    enum State {
+        case display
+        case edit
+        case add
+    }
+    var state: State = .add
+    var presentedContent: UIViewController = UIViewController()
     
     var contact: ContactItem?
-    var editableState: Bool = false
-    var newContact: Bool = false
     
     var coreData: CoreDataHelper?
     
@@ -67,18 +53,9 @@ class ContactDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let _ = contact {
-            initializeView()
-        } else {
-            editableState = true
-        }
+        initializeView()
         
-        configureView(forState: editableState)
-        
-        
-        //        let buttonSystemItem =  editableState ? UIBarButtonItem.SystemItem.save : UIBarButtonItem.SystemItem.edit
-        //        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: #selector(editContact))
-        //        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        configureBarButtonItem(forState: state)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -90,51 +67,59 @@ class ContactDetailsViewController: UIViewController {
         if let firstName = contact?.firstName,
             let lastName = contact?.lastName {
             fullNameLabel?.text = "\(firstName) \(lastName)"
-            
-            firstNameTextInput.text = firstName
-            lastNameTextInput.text = lastName
         }
         
-        if let phoneNumber = contact?.phoneNumber {
-            phoneNumberLabel.text = phoneNumber
-            phoneNumberTextInput.text = phoneNumber
-            
-            phoneNumberTextInput.isEnabled = true
-        }
+        presentedContent = viewController(for: state)
+        presentedContent.view.frame = containerView.frame
+        addChild(presentedContent)
         
-        if let streetAddress1 = contact?.streetAddress1 {
-            streetAddress1Label.text = streetAddress1
-            streetAddress1TextInput.text = streetAddress1
-        }
+        containerView.addSubview(presentedContent.view)
+        presentedContent.didMove(toParent: self)
         
-        if let streetAddress2 = contact?.streetAddress2 {
-            streetAddress2Label.text = streetAddress2
-            streetAddress2TextInput.text = streetAddress2
-        }
+        setContentViewConstraints(for: presentedContent)
+    }
+    
+    func addEditContentView() {
         
-        if let city = contact?.city {
-            cityLabel.text = city
-            cityTextInput.text = city
-        }
+        presentedContent.willMove(toParent: nil)
+        presentedContent.view.removeFromSuperview()
+        presentedContent.removeFromParent()
         
-        if let state = contact?.state {
-            stateLabel.text = state
-            stateTextInput.text = state
-        }
+        presentedContent = viewController(for: .edit)
+        presentedContent.view.frame = containerView.frame
+        addChild(presentedContent)
         
-        if let zipCode = contact?.zipCode {
-            zipCodeLabel.text = zipCode
-            zipCodeTextInput.text = zipCode
-        }
+        containerView.addSubview(presentedContent.view)
+        presentedContent.didMove(toParent: self)
         
-        firstNameTextInput.delegate = self
-        lastNameTextInput.delegate = self
-        phoneNumberTextInput.delegate = self
-        streetAddress1TextInput.delegate = self
-        streetAddress2TextInput.delegate = self
-        cityTextInput.delegate = self
-        stateTextInput.delegate = self
-        zipCodeTextInput.delegate = self
+        setContentViewConstraints(for: presentedContent)
+    }
+    
+    func addDisplayContentView() {
+        
+        presentedContent.willMove(toParent: nil)
+        presentedContent.view.removeFromSuperview()
+        presentedContent.removeFromParent()
+        
+        presentedContent = viewController(for: .display)
+        presentedContent.view.frame = containerView.frame
+        addChild(presentedContent)
+        
+        containerView.addSubview(presentedContent.view)
+        presentedContent.didMove(toParent: self)
+        
+        setContentViewConstraints(for: presentedContent)
+    }
+    
+    func setContentViewConstraints(for viewController: UIViewController) {
+        viewController.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewController.view.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0).isActive = true
+        viewController.view.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0).isActive = true
+        
+        viewController.view.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
+        viewController.view.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 0).isActive = true
+        
     }
     
     @objc func dismissKeyboard() {
@@ -142,153 +127,130 @@ class ContactDetailsViewController: UIViewController {
     }
     
     @objc func editContact() {
-        editableState = true
-        firstNameTextInput.becomeFirstResponder()
-        configureView(forState: editableState)
+        state = .edit
+        configureBarButtonItem(forState: state)
+        addEditContentView()
     }
     
     @objc func saveContact() {
-        editableState = false
         
-        if firstNameTextInput.isFirstResponder {
-            firstNameTextInput.resignFirstResponder()
-        }
+        contactActionDelegate.saveAction()
+        addDisplayContentView()
         
-        if lastNameTextInput.isFirstResponder {
-            lastNameTextInput.resignFirstResponder()
-        }
-        
-        if phoneNumberTextInput.isFirstResponder {
-            phoneNumberTextInput.resignFirstResponder()
-        }
-        
-        if streetAddress1TextInput.isFirstResponder {
-            streetAddress1TextInput.resignFirstResponder()
-        }
-        
-        if streetAddress2TextInput.isFirstResponder {
-            streetAddress2TextInput.resignFirstResponder()
-        }
-        
-        if cityTextInput.isFirstResponder {
-            cityTextInput.resignFirstResponder()
-        }
-        
-        if stateTextInput.isFirstResponder {
-            stateTextInput.resignFirstResponder()
-        }
-        
-        if zipCodeTextInput.isFirstResponder {
-            zipCodeTextInput.resignFirstResponder()
-        }
-        
-        if newContact {
-            var contactItem = ContactItem()
-            contactItem.contactID = UUID().uuidString
-            contactItem.firstName = firstNameTextInput.text
-            contactItem.lastName = lastNameTextInput.text
-            contactItem.phoneNumber = phoneNumberTextInput.text
-            contactItem.streetAddress1 = streetAddress1TextInput.text
-            contactItem.streetAddress2 = streetAddress2TextInput.text
-            contactItem.city = cityTextInput.text
-            contactItem.state = stateTextInput.text
-            contactItem.zipCode = zipCodeTextInput.text
-            
-            coreData?.addContact(contactItem)
-            navigationController?.popViewController(animated: true)
-        } else {
-            configureView(forState: editableState)
-            if let item = self.contact {
-                
-                var contactCopy = item
-                contactCopy.firstName = firstNameTextInput.text
-                contactCopy.lastName = lastNameTextInput.text
-                contactCopy.phoneNumber = phoneNumberTextInput.text
-                contactCopy.streetAddress1 = streetAddress1TextInput.text
-                contactCopy.streetAddress2 = streetAddress2TextInput.text
-                contactCopy.city = cityTextInput.text
-                contactCopy.state = stateTextInput.text
-                contactCopy.zipCode = zipCodeTextInput.text
-                
-                fullNameLabel.text = contactCopy.fullName
-                
-                coreData?.updateContact(contactCopy)
-            }
-        }
+        state = .display
+        configureBarButtonItem(forState: state)
     }
     
-    func configureView(forState state: Bool) {
-        addressEditStack.isHidden = !state
-        addressViewStack.isHidden = state
-        
-        phoneNumberEditStack.isHidden = !state
-        phoneNumberViewStack.isHidden = state
-        
-        editView.isUserInteractionEnabled = true
-        
-        let buttonSystemItem =  state ? UIBarButtonItem.SystemItem.save : UIBarButtonItem.SystemItem.edit
-        let barButtonAction = state ?  #selector(saveContact) : #selector(editContact)
+    func configureBarButtonItem(forState state: State) {
+    
+        let buttonSystemItem =  state == .display ? UIBarButtonItem.SystemItem.edit : UIBarButtonItem.SystemItem.save
+        let barButtonAction = state == .display ? #selector(editContact) : #selector(saveContact)
         
         let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: buttonSystemItem, target: self, action: barButtonAction)
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @IBAction func makeCall(_ sender: Any) {
         
-        displayViewConstraint.constant = state ? 0 : 200
-        editViewConstraint.constant = state ? 350 : 0
+        guard let phoneNumber = contact?.phoneNumber else {
+            return
+        }
+    
+        guard let url = URL(string: "tel://\(phoneNumber)") else {
+            return
+        }
         
+        print("making a call to \(url)")
         
-        UIView.animate(withDuration: 500, animations: {
-            self.displayView.isHidden = state
-            self.editView.isHidden = !state
-            self.editView.layoutIfNeeded()
-            self.displayView.layoutIfNeeded()
-        });
+        UIApplication.shared.open(url)
+    }
+    
+    @IBAction func sendMessage(_ sender: Any) {
         
+        guard MFMessageComposeViewController.canSendText() else {
+            print("Cannot send text")
+            return
+        }
+        
+        guard let phoneNumber = contact?.phoneNumber else {
+            return
+        }
+        
+        let messageViewController = MFMessageComposeViewController()
+        messageViewController.recipients = [phoneNumber]
+        messageViewController.messageComposeDelegate = self
+     
+        present(messageViewController, animated: true, completion: nil)
+    }
+    
+}
+
+extension ContactDetailsViewController: EditableContactDelegate {
+    func updatedInfo(updatedContact: ContactItem?) {
+        
+        switch state {
+        case .add:
+            coreData?.addContact(updatedContact!)
+            navigationController?.popViewController(animated: true)
+            
+        case .edit:
+            fullNameLabel.text = updatedContact!.fullName
+            coreData?.updateContact(updatedContact!)
+            
+            contact = coreData?.fetchContact(by: updatedContact!.contactID!)
+            view.setNeedsDisplay()
+            
+        default:
+            break
+        }
     }
 }
 
-
-//  MARK: -UITextFieldDelegate
-extension ContactDetailsViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        switch textField {
-        case firstNameTextInput:
-            firstNameTextInput.resignFirstResponder()
-            lastNameTextInput.becomeFirstResponder()
-            
-        case lastNameTextInput:
-            lastNameTextInput.resignFirstResponder()
-            phoneNumberTextInput.becomeFirstResponder()
-            
-        case phoneNumberTextInput:
-            phoneNumberTextInput.resignFirstResponder()
-            streetAddress1TextInput.becomeFirstResponder()
-            
-        case streetAddress1TextInput:
-            streetAddress1TextInput.resignFirstResponder()
-            streetAddress2TextInput.becomeFirstResponder()
-            
-        case streetAddress2TextInput:
-            streetAddress2TextInput.resignFirstResponder()
-            cityTextInput.becomeFirstResponder()
-            
-        case cityTextInput:
-            cityTextInput.resignFirstResponder()
-            stateTextInput.becomeFirstResponder()
-            
-        case stateTextInput:
-            stateTextInput.resignFirstResponder()
-            zipCodeTextInput.becomeFirstResponder()
-            
-        case zipCodeTextInput:
-            zipCodeTextInput.resignFirstResponder()
-            
-        default: break
-            
+extension ContactDetailsViewController: MFMessageComposeViewControllerDelegate {
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        switch (result) {
+        case .cancelled:
+            print("Message was cancelled")
+        case .failed:
+            print("Message failed")
+        case .sent:
+            print("Message was sent")
+        default:
+            break
         }
+    }
+}
+
+private extension ContactDetailsViewController {
+    
+    func viewController(for state: State?) -> UIViewController {
+
+        switch state {
+        case .add:
+            let destinationViewController = EditInfoViewController()
+            
+            destinationViewController.delegate = self
+            contactActionDelegate = destinationViewController
+            
+            return destinationViewController
         
-        
-        
-        return true
+        case .edit:
+            let destinationViewController = EditInfoViewController()
+            destinationViewController.contact = contact
+            
+            destinationViewController.delegate = self
+            contactActionDelegate = destinationViewController
+            
+            return destinationViewController
+            
+        case .display:
+            let destinationViewController = DisplayInfoViewController()
+            destinationViewController.contact = contact
+            return destinationViewController
+            
+        default:
+            return UIViewController()
+        }
     }
 }

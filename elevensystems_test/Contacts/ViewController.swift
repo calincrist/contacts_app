@@ -52,8 +52,10 @@ class ViewController: UIViewController {
 
     @objc func addContact() {
         let navigationController = self.navigationController
-        let detailsViewController: ContactDetailsViewController = ContactDetailsViewController()
-        detailsViewController.newContact = true
+        
+        let detailsViewController = UIStoryboard(name: "ContactDetails",
+                                                 bundle: nil).instantiateViewController(withIdentifier: "contactDetailsViewController") as! ContactDetailsViewController
+        detailsViewController.state = .add
         detailsViewController.coreData = viewModel.manager
         
         navigationController?.pushViewController(detailsViewController, animated: true)
@@ -93,11 +95,14 @@ extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let contact = viewModel.contactItem(at: indexPath)
         
-        let navigationController = self.navigationController
-        let detailsViewController: ContactDetailsViewController = ContactDetailsViewController()
+        let detailsViewController = UIStoryboard(name: "ContactDetails",
+                                                 bundle: nil).instantiateViewController(withIdentifier: "contactDetailsViewController") as! ContactDetailsViewController
         detailsViewController.contact = contact
         detailsViewController.coreData = viewModel.manager
+        detailsViewController.state = .display
         
+        
+        let navigationController = self.navigationController
         navigationController?.pushViewController(detailsViewController, animated: true)
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA306DFB2407118F0020EA2B /* ContactDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA306DFA2407118F0020EA2B /* ContactDetails.storyboard */; };
 		CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FB22404779900917AF3 /* AppDelegate.swift */; };
 		CA377FB52404779900917AF3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FB42404779900917AF3 /* SceneDelegate.swift */; };
 		CA377FB72404779900917AF3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FB62404779900917AF3 /* ViewController.swift */; };
@@ -18,7 +19,10 @@
 		CA377FD82404779B00917AF3 /* elevensystems_testUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FD72404779B00917AF3 /* elevensystems_testUITests.swift */; };
 		CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */; };
 		CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */; };
-		CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */; };
+		CABC344E240712BF0076EE42 /* DisplayInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABC344C240712BF0076EE42 /* DisplayInfoViewController.swift */; };
+		CABC344F240712BF0076EE42 /* DisplayInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CABC344D240712BF0076EE42 /* DisplayInfoViewController.xib */; };
+		CABC3452240712CE0076EE42 /* EditInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABC3450240712CE0076EE42 /* EditInfoViewController.swift */; };
+		CABC3453240712CE0076EE42 /* EditInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CABC3451240712CE0076EE42 /* EditInfoViewController.xib */; };
 		CACA33BE2405EC5B00541675 /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33BD2405EC5B00541675 /* JSONLoader.swift */; };
 		CACA33C32405ED0A00541675 /* ContactItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CACA33C22405ED0A00541675 /* ContactItem.swift */; };
 		CACA33C52405F38100541675 /* initialContacts.json in Resources */ = {isa = PBXBuildFile; fileRef = CACA33C42405F38100541675 /* initialContacts.json */; };
@@ -44,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA306DFA2407118F0020EA2B /* ContactDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactDetails.storyboard; sourceTree = "<group>"; };
 		CA377FAF2404779900917AF3 /* elevensystems_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = elevensystems_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA377FB22404779900917AF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CA377FB42404779900917AF3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +66,10 @@
 		CA377FD92404779B00917AF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
-		CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailsViewController.xib; sourceTree = "<group>"; };
+		CABC344C240712BF0076EE42 /* DisplayInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayInfoViewController.swift; sourceTree = "<group>"; };
+		CABC344D240712BF0076EE42 /* DisplayInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DisplayInfoViewController.xib; sourceTree = "<group>"; };
+		CABC3450240712CE0076EE42 /* EditInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInfoViewController.swift; sourceTree = "<group>"; };
+		CABC3451240712CE0076EE42 /* EditInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditInfoViewController.xib; sourceTree = "<group>"; };
 		CACA33BD2405EC5B00541675 /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
 		CACA33C22405ED0A00541675 /* ContactItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactItem.swift; sourceTree = "<group>"; };
 		CACA33C42405F38100541675 /* initialContacts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = initialContacts.json; sourceTree = "<group>"; };
@@ -94,6 +102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA306DF724070F860020EA2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CABC344C240712BF0076EE42 /* DisplayInfoViewController.swift */,
+				CABC344D240712BF0076EE42 /* DisplayInfoViewController.xib */,
+				CABC3450240712CE0076EE42 /* EditInfoViewController.swift */,
+				CABC3451240712CE0076EE42 /* EditInfoViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		CA377FA62404779900917AF3 = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +171,7 @@
 		CA377FE524047B0700917AF3 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				CA306DF724070F860020EA2B /* Views */,
 				CA377FB62404779900917AF3 /* ViewController.swift */,
 				CA377FE724047F8000917AF3 /* ContactTableViewCell.swift */,
 				CA377FED2404823A00917AF3 /* Details */,
@@ -163,7 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				CA377FE92404823400917AF3 /* ContactDetailsViewController.swift */,
-				CA377FEA2404823400917AF3 /* ContactDetailsViewController.xib */,
+				CA306DFA2407118F0020EA2B /* ContactDetails.storyboard */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -292,9 +312,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CACA33C52405F38100541675 /* initialContacts.json in Resources */,
-				CA377FEC2404823400917AF3 /* ContactDetailsViewController.xib in Resources */,
 				CA377FC22404779B00917AF3 /* LaunchScreen.storyboard in Resources */,
 				CA377FBF2404779B00917AF3 /* Assets.xcassets in Resources */,
+				CABC3453240712CE0076EE42 /* EditInfoViewController.xib in Resources */,
+				CA306DFB2407118F0020EA2B /* ContactDetails.storyboard in Resources */,
+				CABC344F240712BF0076EE42 /* DisplayInfoViewController.xib in Resources */,
 				CA377FBA2404779900917AF3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,8 +343,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA377FB72404779900917AF3 /* ViewController.swift in Sources */,
+				CABC344E240712BF0076EE42 /* DisplayInfoViewController.swift in Sources */,
 				CA377FE824047F8000917AF3 /* ContactTableViewCell.swift in Sources */,
 				CA377FEB2404823400917AF3 /* ContactDetailsViewController.swift in Sources */,
+				CABC3452240712CE0076EE42 /* EditInfoViewController.swift in Sources */,
 				CA377FBD2404779900917AF3 /* elevensystems_test.xcdatamodeld in Sources */,
 				CACA33C92405FE7E00541675 /* ContactsViewModel.swift in Sources */,
 				CA377FB32404779900917AF3 /* AppDelegate.swift in Sources */,
